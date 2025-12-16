@@ -1,0 +1,22 @@
+{
+    "id": "sxs-tabs",
+    "displayName": "顶部滑动Tab",
+    "version": "1.0.1",
+    "description": "顶部滑动Tab",
+    "keywords": [
+        "顶部滑动Tab"
+    ],
+    "dcloudext": {
+        "category": [
+            "前端组件",
+            "通用组件"
+        ]
+    },
+    "dependencies": {
+        "@foxglove/cdr": "^3.5.0",
+        "@foxglove/rosmsg": "^5.0.5",
+        "@foxglove/rosmsg2-serialization": "^3.0.3",
+        "@foxglove/ws-protocol": "^0.8.0",
+        "text-decoding": "^1.0.0"
+    }
+}
