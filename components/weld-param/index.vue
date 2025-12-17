@@ -37,7 +37,7 @@
 		<!-- 弹框 -->
 		<uni-popup ref="popup" type="center" @change="changeDialog">
 			<view class="popup-box">
-				<view class="popup-title">新增工艺包 <uni-icons style="float: right;" type="closeempty" color="#909399"
+				<view class="popup-title">新增工艺包<uni-icons style="float: right;" type="closeempty" color="#909399"
 						size="18" @click="closePopup"></uni-icons></view>
 
 				<!-- 表单 -->
@@ -365,7 +365,7 @@
 	}
 
 	::v-deep .uni-forms-item {
-		margin-bottom: 20rpx;
+		margin-bottom: 40rpx;
 		/* 你想要的上下间距 */
 	}
 
