@@ -3,16 +3,12 @@
 		<tip-card title="焊缝列表">
 			<view class="content">
 				<view class="tip-text">
-					<text style="font-size: 10px;">点击图标可编辑，长按可删除</text>
+					<text style="font-size: 10px;">点击图标编辑焊缝</text>
 				</view>
 				<view class="weld-set-box">
 					<AppList class="app-list" :listData="weldList" @listChange="listChange"
 						@showImage="handleShowImage"></AppList>
 				</view>
-				<!-- <view ref="trash" class="trash-bin">
-          <uni-icons type="trash-filled" color="#ff4d4f" size="40" />
-          <text>拖到这里删除</text>
-        </view> -->
 			</view>
 		</tip-card>
 	</view>
@@ -56,12 +52,14 @@
 <style scoped>
 	.content {
 		width: 100%;
+		padding: 10px;
 	}
 
 	.tip-text {
 		font-size: 10px;
 		color: #666;
-		margin-bottom: 10rpx;
+		margin-left: 10px;
+		text-align: left;
 	}
 
 	.weld-set-box {

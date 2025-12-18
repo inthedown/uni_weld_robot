@@ -91,7 +91,7 @@
 				}
 				return [];
 			},
-			isParamSet(){
+			isParamSet() {
 				return this.$task.isParamSet
 			}
 		},
@@ -122,6 +122,12 @@
 								pattern: /^[^\s]{2,20}$/,
 								errorMessage: "长度需为 2~20 个字符，且不能包含空格",
 							},
+							{
+								validateFunction: async(rule, value) => {
+									return await this.$sql.validWeldParam(value)||"工艺包名已存在";
+								},
+								
+							}
 						],
 					},
 					amplitude: {
@@ -180,7 +186,7 @@
 		},
 		methods: {
 			change(value) {
-				// console.log(value);
+				console.log('change',value);
 				if (value === 'add') {
 					// 调用新增工艺包逻辑
 					setTimeout(() => {
@@ -202,6 +208,7 @@
 						voltage: "",
 					};
 				}
+				this.$task.weldParam=this.formData;
 				this.$emit("handleChange", selected);
 			},
 			getWeldParamList() {
@@ -236,11 +243,10 @@
 								icon: "error", // success / none / loading / error (部分平台不支持 error)
 								duration: 1500,
 							});
-						})
-					})
-					.catch((e) => {
 
-					});
+						})
+
+					})
 			},
 			closePopup() {
 				this.$refs.popup.close();
@@ -286,11 +292,11 @@
 		box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05); */
 	}
 
-	.uni-forms-item {
+	.form-container .uni-forms-item {
 		margin-bottom: 10rpx;
 	}
 
-/* 	.uni-forms-item:last-child {
+	/* 	.uni-forms-item:last-child {
 		margin-bottom: 0;
 	} */
 

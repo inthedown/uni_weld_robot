@@ -444,6 +444,40 @@ const sql = {
 			return true; // 保证返回值类型一致
 		});
 		// #endif
+	},
+	// 验证是否重复
+	validWeldParam(name) {
+		// #ifdef APP-PLUS
+		const timestamp = this.formatTime();
+		const sql = `
+	    select *
+	    from weld_job_config
+	    WHERE name = '${name}';
+	  `;
+	
+		return this.selectSql(this.weldJobConfig, sql)
+			.then(results => {
+				console.log('✅ 查询工艺包成功', results);
+				if(Array.isArray(results) && results.length >= 1){
+					return false;
+				}else{
+					return true;
+				}
+				
+			})
+			.catch(err => {
+				console.error('❌ 查询工艺包失败', err.message);
+				throw err;
+			});
+		// #endif
+	
+		// #ifdef WEB
+		// 在 H5 里没有 sqlite，返回一个模拟的 Promise
+		return Promise.resolve().then(() => {
+			console.log(`🌐(H5模拟) 已更新 uuid=${formData.uuid} 的工艺包`);
+			return true; // 保证返回值类型一致
+		});
+		// #endif
 	}
 };
 

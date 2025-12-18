@@ -208,7 +208,6 @@
 				} else {
 					
 					this.$task.currentStep = index;
-					console.log('11113')
 					this.$task.stepCompleted = false;
 					this.$task.stepTrigger++;
 					this.$task.mode = "detail";
@@ -225,13 +224,13 @@
 				}
 				this.$task.mode = "steps";
 				this.$emit('showNav', true);
-				this.currentStepConfig.status = 'COMPLETED'
-				if (this.localTask.currentStep === 4) {
-					this.$task.reset();
-					this.localTask = {
-						...this.$task
-					};
-				}
+				// this.currentStepConfig.status = 'COMPLETED'
+				// if (this.localTask.currentStep === 4) {
+				// 	this.$task.reset();
+				// 	this.localTask = {
+				// 		...this.$task
+				// 	};
+				// }
 			},
 			handleButtonClick(btn, stepIndex) {
 				if (btn.text === '建立点云') {
@@ -276,11 +275,12 @@
 				}
 			},
 			changeParam(param) {
+				console.log("param", param);
 				this.$task.weldParam = param;
 				if (param && Object.keys(param).length > 0) {
 					this.$task.isParamSet = false;
 				}
-				console.log("changeParam", this.$task.isParamSet);
+				console.log("this.$task.isParamSet", this.$task.isParamSet);
 			},
 			checkParam() {
 				const weldParam = this.$task.weldParam;

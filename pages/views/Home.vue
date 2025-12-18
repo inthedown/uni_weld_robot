@@ -34,7 +34,7 @@
 				</navigate-card>
 			</view>
 		</view>
-		<button class="zoom" @click="fangda">+</button>
+		<!-- <button class="zoom" @click="fangda">+</button> -->
 		<!-- <view v-if="currentStep === 4">
 			<welding-message @goto-steps="handleGotoSteps" :is_finished="isFinished" :weld_param="weld_param"
 				:is_simulate="simulateFlag" :weld_list="weldList"></welding-message>
@@ -1575,13 +1575,13 @@ console.log('更新焊缝',updated.weld_positions)
 					this.timer = null;
 				}
 			},
-			changeParam(param) {
-				this.weld_param = param;
-				if (param && Object.keys(param).length > 0) {
-					this.isParamSet = false;
-				}
-				console.log("changeParam", this.weld_param);
-			},
+			// changeParam(param) {
+			// 	this.weld_param = param;
+			// 	if (param && Object.keys(param).length > 0) {
+			// 		this.isParamSet = false;
+			// 	}
+			// 	console.log("changeParam", this.weld_param);
+			// },
 			handleStartIdentify() {
 				//返回到设置焊缝类型阶段
 				this.$task.currentStep = 0;
@@ -1822,8 +1822,6 @@ console.log('更新焊缝',updated.weld_positions)
 		bottom: 0;
 		border-radius: 12rpx;
 		z-index: 1000;
-
-		// background-color: #005cff;
 		.navigate-card {
 			width: 800rpx;
 		}

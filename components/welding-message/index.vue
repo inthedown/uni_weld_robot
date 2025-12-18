@@ -11,8 +11,8 @@
 
 					<template v-if="task.status === 'done'">
 						<view class="status">
-							<uni-icons type="checkbox" color="#67C23A" size="15" />
-							<text class="task-text done-text">已完成</text>
+							<!-- <uni-icons type="checkbox" color="#67C23A" size="15" /> -->
+							<text class="task-text done-text">✅已完成</text>
 						</view>
 					</template>
 
@@ -138,6 +138,7 @@
 	.task-text {
 		// width: 300rpx;
 		font-size: 10px;
+		margin-right: 10px;
 	}
 
 	.status {
