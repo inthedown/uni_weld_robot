@@ -6,17 +6,11 @@
 		<view class="main">
 			<view class="process-package-table">
 				<scroll-view scroll-y class="card-list">
-				      <WeldParamCard
-				        v-for="(pkg, index) in weldParamList"
-				        :key="pkg.uuid"
-				        :pkg="pkg"
-				        :index="index"
-				        @edit="editPackage"
-				        @delete="deletePackage"
-				      />
-				    </scroll-view>
-				
-				
+					<WeldParamCard v-for="(pkg, index) in weldParamList" :key="pkg.uuid" :pkg="pkg" :index="index"
+						@edit="editPackage" @delete="deletePackage" />
+				</scroll-view>
+
+
 				<!-- 弹框 -->
 				<uni-popup ref="popup" type="center" @change="changeDialog">
 					<view class="popup-box">
@@ -94,7 +88,9 @@
 
 	export default {
 		name: "weld-config",
-		 components: { WeldParamCard },
+		components: {
+			WeldParamCard
+		},
 		data() {
 			return {
 				weldParamList: [],
@@ -125,10 +121,16 @@
 								errorMessage: "长度在 2 到 20 个字符",
 							},
 							{
-							      pattern: /^[^\s]{2,16}$/,
-							      message: '请输入16位且不能包含空格',
-							      trigger: 'blur'
-							    }
+								pattern: /^[^\s]{2,16}$/,
+								message: '请输入16位且不能包含空格',
+								trigger: 'blur'
+							}, ,
+							{
+								validateFunction: async (rule, value) => {
+									return await this.$sql.validWeldParam(value) || "工艺包名已存在";
+								},
+
+							}
 						],
 					},
 					amplitude: {
@@ -162,7 +164,7 @@
 							},
 							{
 								// 0 ~ 100 的整数或小数
-								pattern:/^(?:[0-9]|[1-9]\d|100)$/,
+								pattern: /^(?:[0-9]|[1-9]\d|100)$/,
 								errorMessage: "请输入正确的数值(0-100)",
 							},
 						],
@@ -381,8 +383,9 @@
 		margin-right: 20rpx;
 
 	}
+
 	.card-list {
-	  max-height: 900rpx;
-	  min-height: 500rpx;
+		max-height: 900rpx;
+		min-height: 500rpx;
 	}
 </style>
