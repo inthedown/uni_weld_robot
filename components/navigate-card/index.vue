@@ -142,6 +142,8 @@
 		margin-top: 60rpx;
 		/* 给返回按钮留空间 */
 		min-height: 300rpx;
+		max-height: calc(100vh - 300px);
+		overflow-y: auto;
 	}
 
 	.tip-card-footer {

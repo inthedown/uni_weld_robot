@@ -14,14 +14,16 @@ function createStep({
 		status: 'WAIT', //WAIT COMPLETED ERROR
 		dependencies,
 		button,
+		excuteFlag:false,
 		canExecute() {
 			return this.dependencies.every(depIndex => {
 				const depStep = Vue.prototype.$task.steps.find(s => s.index === depIndex)
 				return depStep.status === 'COMPLETED'
-			})
+			})||this.excuteFlag
 		},
 		reset() {
-			this.status = 'WAIT'
+			this.status = 'WAIT';
+			this.excuteFlag = false;
 		}
 	}
 }
@@ -69,7 +71,7 @@ export const TaskSteps = Vue.observable({
 			name: '开始焊接',
 			icon: 'operate_weld',
 			dependencies: [1, 2,3],
-			button:[{type:'primary',text:'建立点云'}]
+			button:[{type:'info',text:'再次焊接'},{type:'primary',text:'建立点云'}]
 		})
 	],
 	weldList:[],
@@ -80,6 +82,15 @@ export const TaskSteps = Vue.observable({
 		this.stepCompleted=true;
 		this.hasBuiltPointCloud=false;
 		this.steps.forEach(s => s.reset())
+	},
+	updateFinalStatus(){
+		this.steps.forEach(s => {
+			if(s.index!=5){
+				s.reset();
+			}else{
+				s.excuteFlag=true;
+			}
+		})
 	},
 	get progress() {
 		const total = this.steps.length

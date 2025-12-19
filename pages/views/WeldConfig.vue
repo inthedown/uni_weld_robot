@@ -124,11 +124,11 @@
 								pattern: /^[^\s]{2,16}$/,
 								message: '请输入16位且不能包含空格',
 								trigger: 'blur'
-							}, ,
+							},
 							{
 								validateFunction: async (rule, value) => {
 									return await this.$sql.validWeldParam(value) || "工艺包名已存在";
-								},
+								}
 
 							}
 						],
@@ -343,6 +343,8 @@
 
 	.main {
 		padding: 20rpx 20rpx;
+		max-height: calc(100vh - 300px);
+		overflow-y: auto;
 	}
 
 	.popup-box {

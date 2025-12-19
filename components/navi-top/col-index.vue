@@ -259,7 +259,7 @@
 					console.log('打开工艺包配置弹窗')
 					this.$task.currentStep = 3;
 					this.$task.stepCompleted = true;
-				} else if (btn.text === '开始焊接') {
+				} else if (btn.text === '开始焊接'||btn.text === '再次焊接') {
 					console.log('开始焊接')
 					if (!this.checkParam()) return;
 					this.$task.currentStep = 5;

@@ -1117,9 +1117,7 @@
 					this.startIdentifyTask();
 				} else if (step === 3) {
 					console.log('开始编辑焊缝');
-					this.generateMarkedImages().then(() => {
-						this.$task.stepCompleted = true;
-					});
+					this.generateMarkedImages();
 				} else if (step === 4) {
 					console.log('开始模拟焊接');
 					this.simulateFlag = true;
@@ -1352,11 +1350,9 @@
 								if (!('weld_id' in data) && data.status === 0) {
 									this.currentStepConfig.status = 'COMPLETED';
 									this.$task.stepCompleted = true;
-
-
-									// if(this.currentStep === 4){
-									// 	this.$task.currentStep=0;
-									// }
+									if(this.currentStep === 5){//首次焊接完成后 只能建立点云和再次焊接 其他按钮置灰
+										this.$task.updateFinalStatus();
+									}
 									return;
 								}
 								this.updateWeldStatus(data.weld_id, data.status);
@@ -1751,11 +1747,13 @@ console.log('更新焊缝',updated.weld_positions)
 			generateMarkedImages() {
 				this.callRenderMethod('markedImages', this.$task.weldList);
 			},
-			handleMarkedImages(list) {
+			handleMarkedImages(list) {//绘制完焊缝后的回调
 				this.printWeldInfo()
 				this.$task.weldList = list
 				this.printWeldInfo()
 				this.$task.stepCompleted = true;
+				this.currentStepConfig.status = 'COMPLETED';
+				console.log('task status',this.$task.steps)
 			},
 			handleLineDrawn(line) {
 				console.log('划线坐标:', line);
